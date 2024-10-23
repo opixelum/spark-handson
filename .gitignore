@@ -1,10 +1,21 @@
-.idea/
-*.iml
-data/
-__pycache__/
-.DS_Store
+# Build files
 out
 dist
+
+# Cache files
 .pytest_cache
+__pycache__/
+
+# Virtual environment files
+.venv/
+venv/
+
+# IDE files
+.idea/
+.vscode/
+
+*.iml
+data/
+.DS_Store
 .terraform*
 terraform.*

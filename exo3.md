@@ -12,6 +12,6 @@ Pour au moins 1 fonction, proposez un test d'un cas d'erreur qui pourrait arrive
 
 ## Tests d'intégrations
 
-Faites un test d'intégration pour les deux jobs Spark.
+Faites un test d'intégration pour le job Spark `clean`.
 
 [Précédent](exo2.md) <- -> [Suivant](exo4.md)
