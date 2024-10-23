@@ -1,33 +1,24 @@
-import pyspark.sql.functions as f
 from pyspark.sql import DataFrame
+from pyspark.sql import functions as f
 
 
-def aggregate(clients_df: DataFrame, cities_df: DataFrame) -> DataFrame:
-    print("Removing minors from `clients` dataframe...")
-    clients_df: DataFrame = only_adults(clients_df)
+def aggregate(df: DataFrame) -> DataFrame:
+    print("Counting clients per department...")
+    dept_count_df: DataFrame = count_clients_per_department(df)
 
-    print("Joining both `clients` and `cities` dataframes on zip code...")
-    joined_df: DataFrame = join_clients_cities(clients_df, cities_df)
+    print("Sorting rows by department with the most clients first...")
+    sorted_df: DataFrame = sort_by_clients_per_department(dept_count_df)
 
-    print("Adding `department` column...")
-    with_department_df: DataFrame = add_department_column(joined_df)
-
-    return with_department_df
+    return sorted_df
 
 
-def only_adults(clients: DataFrame) -> DataFrame:
-    return clients.filter(clients.age >= 18)
+def count_clients_per_department(df: DataFrame) -> DataFrame:
+    return df.groupBy("department").agg(
+        f.countDistinct("name").alias("nb_people")
+    )
 
 
-def join_clients_cities(clients: DataFrame, cities: DataFrame) -> DataFrame:
-    return (clients.join(cities, "zip")
-            .select(clients.name, clients.age, clients.zip, cities.city))
-
-def add_department_column(df: DataFrame) -> DataFrame:
-    return df.withColumn(
-        "department",
-        f.when(
-            f.substring(df.zip, 0, 2) == "20",
-            f.when(df.zip <= 20190, "2A").otherwise("2B")
-        ).otherwise(f.substring(df.zip, 0, 2))
+def sort_by_clients_per_department(df: DataFrame) -> DataFrame:
+    return df.orderBy(
+        f.desc("nb_people"), f.asc("department")
     )

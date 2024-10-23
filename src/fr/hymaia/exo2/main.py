@@ -1,5 +1,5 @@
-from .aggregate import aggregate
 from .clean import clean
+from .aggregate import aggregate
 from pyspark.sql import DataFrame, SparkSession
 
 
@@ -19,17 +19,17 @@ def main():
         header=True
     )
 
-    # Aggregate job
-    agg_df: DataFrame = aggregate.aggregate(clients_df, cities_df)
-    output_path: str = "data/exo2/output"
-    print(f"Writing aggregate dataframe in {output_path}...")
-    agg_df.write.parquet(output_path, mode="overwrite")
-
     # Clean job
-    clean_df: DataFrame = clean.clean(agg_df)
-    output_path: str = "data/exo2/aggregate"
+    clean_df: DataFrame = clean.clean(clients_df, cities_df)
+    output_path: str = "data/exo2/output"
+    print(f"Writing clean dataframe in {output_path}...")
+    clean_df.write.parquet(output_path, mode="overwrite")
+
+    # Aggregate job
+    agg_df: DataFrame = aggregate.aggregate(clean_df)
+    output_path: str = "data/exo2/clean"
     print(f"Writing clean dataframe to {output_path}...")
-    clean_df.coalesce(1).write.csv(
+    agg_df.coalesce(1).write.csv(
         output_path,
         header=True,
         mode="overwrite"
