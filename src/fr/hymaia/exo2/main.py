@@ -27,7 +27,7 @@ def main():
 
     # Aggregate job
     agg_df: DataFrame = aggregate.aggregate(clean_df)
-    output_path: str = "data/exo2/clean"
+    output_path: str = "data/exo2/aggregate"
     print(f"Writing clean dataframe to {output_path}...")
     agg_df.coalesce(1).write.csv(
         output_path,
