@@ -5,6 +5,7 @@ description = "Résolvez les exercices"
 authors = ["Franck Cussac"]
 maintainers = [
     "Anto Benedetti",
+    "David Zhou",
     "Johan Ribeiro--Lamy",
     "Louis Seillier",
     "Romain Nerot"
@@ -20,7 +21,7 @@ pandas = "^2.2.3"
 pyarrow = "^17.0.0"
 numpy = "^1.26.4"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pyspark = "3.5.3"
 pytest = "8.3.3"
 awsglue-dev = "^2021.12.30"
