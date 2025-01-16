@@ -83,13 +83,10 @@ class TestClean(unittest.TestCase):
             Row(zip="20600", city="Bastia"),
         ])
         expected: DataFrame = spark.createDataFrame([
-            Row(name="John", age=67, zip="10001", city="New York", department="04"),
+            Row(name="John", age=67, zip="04001", city="New York", department="04"),
             Row(name="Jane", age=46, zip="20000", city="Ajaccio", department="2A"),
             Row(name="Jack", age=24, zip="20600", city="Bastia", department="2B")
         ])
-
-        # With assert(valueerror):
-            # clean(...) # ask margot
 
         # When
         actual: DataFrame = clean(clients_df, cities_df)
