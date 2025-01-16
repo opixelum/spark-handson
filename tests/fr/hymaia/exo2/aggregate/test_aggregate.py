@@ -3,6 +3,7 @@ from tests.fr.hymaia.spark_test_case import spark
 import unittest
 from pyspark.sql import Row, DataFrame
 from pyspark.testing import assertDataFrameEqual
+from pyspark.sql.utils import AnalysisException
 
 
 class TestAggregate(unittest.TestCase):
@@ -58,3 +59,13 @@ class TestAggregate(unittest.TestCase):
 
         # Then
         assertDataFrameEqual(actual, expected)
+
+    def test_count_clients_per_department_expect_error_missing_col(self):
+        # Missing `department` column
+        data_missing_dept: DataFrame = spark.createDataFrame([
+            Row(name='Fullilove', age=42, zip=26150, city="SOLAURE EN DIOIS"),
+            Row(name='Mccatty', age=18, zip=25650, city="VILLE DU PONT"),
+        ])
+
+        with self.assertRaises(AnalysisException):
+            count_clients_per_department(data_missing_dept)
