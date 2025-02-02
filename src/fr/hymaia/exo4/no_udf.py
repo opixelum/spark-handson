@@ -5,8 +5,9 @@ import pyspark.sql.functions as f
 spark = SparkSession.builder \
     .master("local[*]") \
     .appName("udf") \
+    .config("spark.executor.memory", "8g") \
+    .config("spark.driver.memory", "8g") \
     .getOrCreate()
-
 
 def main():
     sell_path: str = "src/resources/exo4/sell.csv"
