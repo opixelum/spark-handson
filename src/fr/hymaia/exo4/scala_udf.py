@@ -42,5 +42,5 @@ def main():
     end: float = perf_counter()
 
     total_time: float = round(end - start, 3)
-    print(f"Done in {total_time} seconds.") # 18.572 seconds
+    print(f"Done in {total_time} seconds.") # 20.478 seconds
     spark.stop()
