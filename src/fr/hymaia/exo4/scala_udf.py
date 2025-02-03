@@ -4,8 +4,10 @@ from time import perf_counter
 
 
 spark = SparkSession.builder \
-    .appName("exo4") \
     .master("local[*]") \
+    .appName("scala_udf") \
+    .config("spark.executor.memory", "8g") \
+    .config("spark.driver.memory", "8g") \
     .config('spark.jars', 'src/resources/exo4/udf.jar') \
     .getOrCreate()
 
