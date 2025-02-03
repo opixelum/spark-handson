@@ -19,15 +19,14 @@ def main():
         "category_name",
         f.when(sell_df.category < 6, "food").otherwise("furniture")
     )
-    start: float = perf_counter()
-    named_categories_df.count()
-    end: float = perf_counter()
-    total_time: float = round(end - start, 3)
-    print(f"Done in {total_time} seconds.")
 
     named_categories_path: str = "data/exo4/no_udf_named_categories.csv"
     print(f"Writing dataframe to {named_categories_path}...")
+    start: float = perf_counter()
     named_categories_df.write.parquet(named_categories_path, mode="overwrite")
+    end: float = perf_counter()
+    total_time: float = round(end - start, 3)
+    print(f"Done in {total_time} seconds.")
 
     # Price per category per day
     print("Calculating total price per category per day...")
