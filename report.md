@@ -6,6 +6,7 @@
 - Johan RIBEIRO--LAMY
 - Romain NEROT
 - Louis SEILLIER
+- David ZHOU
 
 ## Jobs
 
