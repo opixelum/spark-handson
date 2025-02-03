@@ -20,7 +20,7 @@ def main():
         f.when(sell_df.category < 6, "food").otherwise("furniture")
     )
 
-    named_categories_path: str = "data/exo4/no_udf_named_categories.csv"
+    named_categories_path: str = "data/exo4/no_udf_named_categories.parquet"
     print(f"Writing dataframe to {named_categories_path}...")
     start: float = perf_counter()
     named_categories_df.write.parquet(named_categories_path, mode="overwrite")

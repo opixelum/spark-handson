@@ -37,7 +37,7 @@ def main():
         add_category_name(sell_df.category)
     )
 
-    named_categories_path: str = "data/exo4/scala_udf_named_categories.csv"
+    named_categories_path: str = "data/exo4/scala_udf_named_categories.parquet"
     print(f"Writing dataframe to {named_categories_path}...")
     start: float = perf_counter()
     named_categories_df.write.parquet(named_categories_path, mode="overwrite")

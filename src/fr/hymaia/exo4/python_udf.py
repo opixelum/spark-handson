@@ -27,13 +27,12 @@ def main():
         add_category_name(sell_df.category)
     )
 
-    named_categories_path: str = "data/exo4/python_udf_named_categories.csv"
+    named_categories_path: str = "data/exo4/python_udf_named_categories.parquet"
     print(f"Writing dataframe to {named_categories_path}...")
     start: float = perf_counter()
     named_categories_df.write.parquet(named_categories_path, mode="overwrite")
     end: float = perf_counter()
     total_time: float = round(end - start, 3)
     print(f"Done in {total_time} seconds.")
-
 
     spark.stop()
