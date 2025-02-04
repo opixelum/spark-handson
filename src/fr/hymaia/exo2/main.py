@@ -22,18 +22,15 @@ def main():
     # Clean job
     clean_df: DataFrame = clean.clean(clients_df, cities_df)
     output_path: str = "data/exo2/output"
-    print(f"Writing clean dataframe in {output_path}...")
     clean_df.write.parquet(output_path, mode="overwrite")
 
     # Aggregate job
     agg_df: DataFrame = aggregate.aggregate(clean_df)
     output_path: str = "data/exo2/aggregate"
-    print(f"Writing clean dataframe to {output_path}...")
     agg_df.coalesce(1).write.csv(
         output_path,
         header=True,
         mode="overwrite"
     )
 
-    print("Done.")
     spark.stop()

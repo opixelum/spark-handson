@@ -3,10 +3,7 @@ from pyspark.sql import functions as f
 
 
 def aggregate(df: DataFrame) -> DataFrame:
-    print("Counting clients per department...")
     dept_count_df: DataFrame = count_clients_per_department(df)
-
-    print("Sorting rows by department with the most clients first...")
     sorted_df: DataFrame = sort_by_clients_per_department(dept_count_df)
 
     return sorted_df

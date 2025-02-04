@@ -3,13 +3,8 @@ from pyspark.sql import DataFrame
 
 
 def clean(clients_df: DataFrame, cities_df: DataFrame) -> DataFrame:
-    print("Removing minors from `clients` dataframe...")
     clients_df: DataFrame = only_adults(clients_df)
-
-    print("Joining both `clients` and `cities` dataframes on zip code...")
     joined_df: DataFrame = join_clients_cities(clients_df, cities_df)
-
-    print("Adding `department` column...")
     with_department_df: DataFrame = add_department_column(joined_df)
 
     return with_department_df
